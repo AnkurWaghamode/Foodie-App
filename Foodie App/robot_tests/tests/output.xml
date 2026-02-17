@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.1 (Python 3.14.2 on win32)" generated="2026-02-17T12:40:15.794870" rpa="false" schemaversion="5">
+<suite id="s1" name="User Tests" source="C:\Users\User\WiproTraining\Wipro-Training\Foodie App\robot_tests\tests\user_tests.robot">
+<kw name="Create Session" owner="RequestsLibrary" type="SETUP">
+<msg time="2026-02-17T12:40:15.938726" level="INFO">Creating Session using : alias=foodie, url=http://127.0.0.1:5000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>foodie</arg>
+<arg>http://127.0.0.1:5000</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-02-17T12:40:15.938518" elapsed="0.000412"/>
+</kw>
+<test id="s1-t1" name="Register User Successfully" line="9">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-02-17T12:40:15.940371" level="INFO">${payload} = {'name': 'RobotUser', 'email': 'robotuserRegister User Successfully@gmail.com', 'password': '1234'}</msg>
+<var>${payload}</var>
+<arg>name=RobotUser</arg>
+<arg>email=robotuser${TEST NAME}@gmail.com</arg>
+<arg>password=1234</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<status status="PASS" start="2026-02-17T12:40:15.939708" elapsed="0.000708"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-02-17T12:40:16.103756" level="INFO">POST Request : url=http://127.0.0.1:5000/api/v1/users/register 
+ path_url=/api/v1/users/register 
+ headers={'User-Agent': 'python-requests/2.32.5', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '99', 'Content-Type': 'application/json'} 
+ body=b'{"name": "RobotUser", "email": "robotuserRegister User Successfully@gmail.com", "password": "1234"}' 
+ </msg>
+<msg time="2026-02-17T12:40:16.103866" level="INFO">POST Response : url=http://127.0.0.1:5000/api/v1/users/register 
+ status=201, reason=CREATED 
+ headers={'Server': 'Werkzeug/3.1.5 Python/3.14.2', 'Date': 'Tue, 17 Feb 2026 07:10:16 GMT', 'Content-Type': 'application/json', 'Content-Length': '48', 'Connection': 'close'} 
+ body={
+  "message": "User registered successfully"
+}
+ 
+ </msg>
+<msg time="2026-02-17T12:40:16.103990" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<var>${response}</var>
+<arg>foodie</arg>
+<arg>/api/v1/users/register</arg>
+<arg>json=${payload}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-02-17T12:40:15.940836" elapsed="0.163177"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-02-17T12:40:16.105139" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${response.status_code}</arg>
+<arg>201</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-02-17T12:40:16.104388" elapsed="0.000831"/>
+</kw>
+<status status="PASS" start="2026-02-17T12:40:15.939104" elapsed="0.166577"/>
+</test>
+<kw name="Delete All Sessions" owner="RequestsLibrary" type="TEARDOWN">
+<msg time="2026-02-17T12:40:16.107430" level="INFO">Deleting All Sessions</msg>
+<doc>Removes all the session objects</doc>
+<status status="PASS" start="2026-02-17T12:40:16.107250" elapsed="0.000267"/>
+</kw>
+<status status="PASS" start="2026-02-17T12:40:15.796706" elapsed="0.310849"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="User Tests" id="s1" pass="1" fail="0" skip="0">User Tests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

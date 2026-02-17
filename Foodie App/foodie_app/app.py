@@ -1,0 +1,36 @@
+from flask import Flask
+from config import Config
+from extensions import db
+from routes.restaurant_routes import restaurant_bp
+from routes.dish_routes import dish_bp
+from routes.user_routes import user_bp
+from routes.order_routes import order_bp
+from routes.admin_routes import admin_bp
+
+
+def create_app():
+    app = Flask(__name__)
+    app.config.from_object(Config)
+    app.register_blueprint(restaurant_bp)
+    app.register_blueprint(dish_bp)
+    app.register_blueprint(user_bp)
+    app.register_blueprint(order_bp)
+    app.register_blueprint(admin_bp)
+
+    db.init_app(app)
+
+    from models.restaurant_model import Restaurant
+    from models.dish_model import Dish
+    from models.user_model import User
+    from models.order_model import Order
+    from models.feedback_model import Feedback
+
+    with app.app_context():
+        db.create_all()
+
+    return app
+
+app = create_app()
+
+if __name__ == "__main__":
+    app.run(debug=True)
